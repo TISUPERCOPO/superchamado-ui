@@ -1,0 +1,158 @@
+<main>
+  <p-card styleClass="card-adjust">
+      <div class="mb-3 mt-4">
+          <span class="title colorTitle">Cadastro de Sac</span>
+      </div>
+      <div class="flex justify-content-start mb-4">
+          <button pButton type="button" class="p-button-primary" icon="pi pi-arrow-left" pTooltip="Voltar" routerLink="/sacs" ></button>
+      </div>
+      <form #formConvenio="ngForm" (ngSubmit)="salvar(formConvenio)">
+          <div class="grid flex flex-wrap justify-content-center ">
+              <div class="col-12 md:col-6 lg:col-3">
+                  <span>Cliente</span>
+                  <input type="text" name="descricao" #descricao="ngModel" [(ngModel)]="sac.cliente" pInputText class="w-full" [ngModelOptions]="{standalone: true}"  [required]="true" minlength="2" maxlength="60"
+                  [pKeyFilter]="regex.stringNumber" upperCase >
+
+
+
+                  <app-message [control]="descricao" error="required"
+                  text="cliente obrigatório..."></app-message>
+                  <app-message [control]="descricao" error="minlength"
+                  text="Mínimo de 2 caracteres..."></app-message>
+                  <app-message [control]="descricao" error="maxlength"
+                  text="Máximo de 60 caracteres..."></app-message>
+              </div>
+              <div class="col-12 md:col-6 lg:col-3">
+                  <span>Empresa</span>
+                  <input type="text" name="empresa" #empresa="ngModel" [(ngModel)]="sac.empresa" pInputText class="w-full"  [required]="true" minlength="2" maxlength="60"
+                  [pKeyFilter]="regex.stringNumber" upperCase >
+
+
+
+                  <app-message [control]="empresa" error="required"
+                  text="empresa obrigatório..."></app-message>
+                  <app-message [control]="empresa" error="minlength"
+                  text="Mínimo de 2 caracteres..."></app-message>
+                  <app-message [control]="empresa" error="maxlength"
+                  text="Máximo de 60 caracteres..."></app-message>
+              </div>
+              <div class="col-12 md:col-6 lg:col-3">
+                <span>Pedido</span>
+                <p-inputNumber  name="pedido" #pedido="ngModel" [(ngModel)]="sac.pedido" class="w-full"   [required]="true" minlength="2" maxlength="60"
+                [pKeyFilter]="regex.stringNumber"> </p-inputNumber>
+
+                <app-message [control]="descricao" error="required"
+                text="pedido obrigatório..."></app-message>
+              </div>
+              <div class="col-12 md:col-6 lg:col-3">
+                  <span>Vendedor</span>
+                  <p-dropdown styleClass="dropdown" [autoDisplayFirst]="false"
+                   [virtualScroll]="true" [itemSize]="30" filter="true"
+                  [options]="vendedor" placeholder="Selecione..." [(ngModel)]="sac.vendedor"
+                  [emptyFilterMessage]="messageDrop" [showClear]="true" required [ngModelOptions]="{standalone: true}">
+                </p-dropdown>
+
+              </div>
+              <div class="col-12 md:col-6 lg:col-3">
+                  <span>Problema</span>
+                  <p-dropdown styleClass="dropdown" name="formapagamento" [autoDisplayFirst]="false"
+                  #formapagamento="ngModel" [virtualScroll]="true" [itemSize]="30" filter="true"
+                  [options]="problema" placeholder="Selecione..." [(ngModel)]="sac.problema"
+                  [emptyFilterMessage]="messageDrop" [showClear]="true" required [ngModelOptions]="{standalone: true}">
+                </p-dropdown>
+
+              </div>
+              <div class="col-12 md:col-6 lg:col-3">
+                  <span>Setor</span>
+                  <p-dropdown styleClass="dropdown" name="formapagamento" [autoDisplayFirst]="false"
+                  #formapagamento="ngModel" [virtualScroll]="true" [itemSize]="30" filter="true"
+                  [options]="setor" placeholder="Selecione..." [(ngModel)]="sac.setor"
+                  [emptyFilterMessage]="messageDrop" [showClear]="true" required [ngModelOptions]="{standalone: true}">
+                </p-dropdown>
+              </div>
+              <div class="col-12 md:col-6 lg:col-3">
+                <span>Crédito</span>
+                <input type="text" name="credito" #credito="ngModel" [(ngModel)]="sac.credito" pInputText class="w-full"  [required]="true"
+                [pKeyFilter]="regex.stringNumber" upperCase>
+
+                <app-message [control]="descricao" error="required"
+                text="credito obrigatório..."></app-message>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Transportadoras</span>
+              <p-dropdown styleClass="dropdown" name="formapagamento" [autoDisplayFirst]="false"
+              #formapagamento="ngModel" [virtualScroll]="true" [itemSize]="30" filter="true"
+              [options]="transportadoras" placeholder="Selecione..." [(ngModel)]="sac.transportadora"
+              [emptyFilterMessage]="messageDrop" [showClear]="true" required [ngModelOptions]="{standalone: true}">
+            </p-dropdown>
+          </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Tipo Pedido</span>
+              <p-dropdown styleClass="dropdown" name="formapagamento" [autoDisplayFirst]="false"
+              #formapagamento="ngModel" [virtualScroll]="true" [itemSize]="30" filter="true"
+              [options]="tipopedido" placeholder="Selecione..." [(ngModel)]="sac.tipopedido"
+              [emptyFilterMessage]="messageDrop" [showClear]="true" required [ngModelOptions]="{standalone: true}">
+            </p-dropdown>
+          </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Devolução</span>
+              <p-dropdown styleClass="dropdown" name="formapagamento" [autoDisplayFirst]="false"
+              #formapagamento="ngModel" [virtualScroll]="true" [itemSize]="30" filter="true"
+              [options]="devolucao" placeholder="Selecione..." [(ngModel)]="sac.devolucao"
+              [emptyFilterMessage]="messageDrop" [showClear]="true" required>
+            </p-dropdown>
+          </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Valor Crédito</span>
+              <p-inputNumber [(ngModel)]="sac.valorcredito" inputId="locale-br" mode="currency"  [ngModelOptions]="{standalone: true}" currency="BRL" [minFractionDigits]="2" pInputMask="currency" > </p-inputNumber>
+
+          </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <span >Data da Finalização</span>
+              <p-calendar styleClass="flex w-full" baseZIndex="99999" appendTo="body" name="dataprevisao" showButtonBar="true" [monthNavigator]="true" [yearNavigator]="true"
+            yearRange="1910:2030" dateFormat="dd/mm/yy" [(ngModel)]="sac.dataprevisao" #dataprevisao="ngModel"
+            [showIcon]="true" required [ngModelOptions]="{standalone: true}"></p-calendar>
+
+          </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Frete</span>
+              <p-inputNumber [(ngModel)]="sac.frete" inputId="locale-br" mode="currency"  [ngModelOptions]="{standalone: true}" currency="BRL" [minFractionDigits]="2" pInputMask="currency" > </p-inputNumber>
+
+          </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Custo Total</span>
+              <p-inputNumber [(ngModel)]="sac.custoTotal" inputId="locale-br" mode="currency"  [ngModelOptions]="{standalone: true}" currency="BRL" [minFractionDigits]="2" pInputMask="currency" > </p-inputNumber>
+
+          </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Obersavação</span>
+              <textarea rows="5" cols="50" pInputTextarea   [ngModelOptions]="{standalone: true}" [(ngModel)]="sac.observacao"></textarea>
+
+          </div>
+
+          </div>
+          <div class="flex justify-content-center">
+              <div class="flex align-items-center justify-content-center">
+                  <h5>Status</h5>
+              </div>
+             </div>
+          <div class="flex justify-content-center">
+              <div class="flex align-items-center justify-content-center">
+                  <p-inputSwitch [(ngModel)]="sac.status" name="status"
+                  [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+              </div>
+          </div>
+          <div class="flex flex-wrap justify-content-center mt-4">
+              <div class="col-12 md:col-6 lg:col-3">
+                  <button pButton type="submit" class="p-button-primary w-full" icon="pi pi-save" [disabled]="formConvenio.invalid || salvando " pTooltip="Salvar" label="Salvar"></button>
+              </div>
+          </div>
+          <div *ngIf="salvando" class="grid flex justify-content-center mt-4">
+              <p-progressSpinner [style]="{width: '50px', heigth: '50px'}" styleClass="custom-spinner" strokeWidth="8" animation=".5s"></p-progressSpinner>
+              <div class="grid col-12 justify-content-center">
+                  <h4>Salvando aguarde...</h4>
+              </div>
+          </div>
+      </form>
+  </p-card>
+</main>

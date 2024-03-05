@@ -1,0 +1,70 @@
+<main>
+  <p-card styleClass="card-adjust p-mt-5 p-mx-3">
+    <h4>Relatórios</h4>
+
+    <p-accordion>
+
+
+
+
+
+      <p-accordionTab header="Atendimentos Mensal">
+        <form #atendMensal="ngForm" autocomplete="off" (ngSubmit)="gerarMensal()">
+          <div class="grid p-fluid p-justify-center">
+            <div class="col-12 md:col-6 lg:col-3">
+              <p-dropdown [options]="meses" [(ngModel)]="mes" name="mes" placeholder="Escolha um Mes" [showClear]="true"
+                required></p-dropdown>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <p-dropdown [options]="anos" [(ngModel)]="ano" name="ano" placeholder="Escolha um Ano" [showClear]="true"
+                required></p-dropdown>
+            </div>
+          </div>
+          <div class="grid p-fluid p-justify-center">
+            <div class="col-12 md:col-6 lg:col-3">
+              <button pButton pRipple type="submit" class="p-button-raised p-button-primary" label="Gerar Relatório"
+                [disabled]="atendMensal.invalid"></button>
+            </div>
+          </div>
+        </form>
+      </p-accordionTab>
+
+      <p-accordionTab header="Atendimentos Mensal por Sac">
+        <form #atendMensalConv="ngForm" autocomplete="off" (ngSubmit)="gerarMensalSac()">
+          <div class="grid p-fluid p-justify-center">
+            <div class="col-12 md:col-6 lg:col-3">
+              <p-dropdown [options]="meses" [(ngModel)]="mes" name="mes" placeholder="Escolha um Mes" [showClear]="true"
+                required></p-dropdown>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <p-dropdown [options]="anos" [(ngModel)]="ano" name="ano" placeholder="Escolha um Ano" [showClear]="true"
+                required></p-dropdown>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+              <p-dropdown [options]="sacs" [(ngModel)]="sac" name="sac" placeholder="Escolha um sac"
+                [showClear]="true" required></p-dropdown>
+            </div>
+          </div>
+          <div class="grid p-fluid p-justify-center">
+            <div class="col-12 md:col-6 lg:col-3">
+              <button pButton pRipple type="submit" class="p-button-raised p-button-primary" label="Gerar Relatório"
+                [disabled]="atendMensal.invalid"></button>
+            </div>
+          </div>
+        </form>
+      </p-accordionTab>
+
+      <p-accordionTab header="Sac">
+        <button pButton pRipple label="Gerar Relatório" (click)="gerarSacs()"
+          class="p-button-raised p-button-primary"></button>
+      </p-accordionTab>
+
+
+
+      <p-accordionTab header="Usuários">
+        <button pButton pRipple label="Gerar Relatório" (click)="gerarUsuarios()"
+          class="p-button-raised p-button-primary"></button>
+      </p-accordionTab>
+    </p-accordion>
+  </p-card>
+</main>

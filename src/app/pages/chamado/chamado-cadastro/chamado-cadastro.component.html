@@ -1,0 +1,90 @@
+<main>
+  <p-card styleClass="card-adjust">
+      <div class="mb-3">
+          <span class="title colorTitle">Cadastro de Chamado</span>
+      </div>
+      <div class="flex justify-content-start mb-2">
+          <button pButton type="button" class="p-button-primary" icon="pi pi-arrow-left" pTooltip="Voltar" routerLink="/chamados" ></button>
+      </div>
+      <form #formConvenio="ngForm" (ngSubmit)="salvar(formConvenio)">
+          <div class="grid flex flex-wrap justify-content-center ">
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Titulo</span>
+              <input type="text" name="titulo" #titulo="ngModel" [(ngModel)]="chamado.titulo" pInputText class="w-full"  [required]="true" minlength="2" maxlength="60"
+              [pKeyFilter]="regex.stringNumber" upperCase>
+
+              <app-message [control]="titulo" error="required"
+              text="Titulo obrigatório..."></app-message>
+              <app-message [control]="titulo" error="minlength"
+              text="Mínimo de 2 caracteres..."></app-message>
+              <app-message [control]="titulo" error="maxlength"
+              text="Máximo de 60 caracteres..."></app-message>
+          </div>
+
+
+              <div class="col-12 md:col-6 lg:col-3">
+                <span>Categoria</span>
+                <p-dropdown styleClass="dropdown" name="categoria" [autoDisplayFirst]="false"
+                #categoria="ngModel" [virtualScroll]="true" [itemSize]="30" filter="true"
+                [options]="categorias" placeholder="Selecione..." [(ngModel)]="chamado.categoria.id"
+                [emptyFilterMessage]="messageDrop" [showClear]="true"  required>
+              </p-dropdown>
+            </div>
+              <div class="col-12 md:col-6 lg:col-3">
+                <span>Setor</span>
+                <p-dropdown styleClass="dropdown" name="setor" [autoDisplayFirst]="false"
+                #setor="ngModel" [virtualScroll]="true" [itemSize]="30" filter="true"
+                [options]="setores" placeholder="Selecione..." [(ngModel)]="chamado.setor.id"
+                [emptyFilterMessage]="messageDrop" [showClear]="true" required>
+              </p-dropdown>
+            </div>
+
+            <div class="col-12 md:col-6 lg:col-3">
+              <span>Urgencia</span>
+              <p-dropdown styleClass="dropdown" [autoDisplayFirst]="false"
+               [virtualScroll]="true" [itemSize]="30" filter="true"
+              [options]="urgencia" placeholder="Selecione..." [(ngModel)]="chamado.urgencia"
+              [emptyFilterMessage]="messageDrop" [showClear]="true" required [ngModelOptions]="{standalone: true}">
+            </p-dropdown>
+
+          </div>
+
+          </div>
+
+          <div class="flex justify-content-center">
+            <div class="flex align-items-center justify-content-center">
+              <h5>Descrição</h5>
+              </div>
+        </div>
+
+        <div class="flex justify-content-center">
+          <div class="flex align-items-center justify-content-center">
+            <textarea style="width: 300px; height: 150px;" rows="5" cols="30" pInputTextarea   name="descricao" #descricao="ngModel" [(ngModel)]="chamado.descricao"  [required]="true" ></textarea>
+          </div>
+      </div>
+
+          <div class="flex justify-content-center">
+              <div class="flex align-items-center justify-content-center">
+                  <h5>Status</h5>
+              </div>
+             </div>
+          <div class="flex justify-content-center">
+              <div class="flex align-items-center justify-content-center">
+                  <p-inputSwitch [(ngModel)]="chamado.status" name="status"
+                  ></p-inputSwitch>
+              </div>
+          </div>
+          <div class="flex flex-wrap justify-content-center mt-4">
+              <div class="col-12 md:col-6 lg:col-3">
+                  <button pButton type="submit" class="p-button-primary w-full" icon="pi pi-save" [disabled]="formConvenio.invalid || salvando " pTooltip="Salvar" label="Salvar"></button>
+              </div>
+          </div>
+          <div *ngIf="salvando" class="grid flex justify-content-center mt-4">
+              <p-progressSpinner [style]="{width: '50px', heigth: '50px'}" styleClass="custom-spinner" strokeWidth="8" animation=".5s"></p-progressSpinner>
+              <div class="grid col-12 justify-content-center">
+                  <h4>Salvando aguarde...</h4>
+              </div>
+          </div>
+      </form>
+  </p-card>
+</main>
